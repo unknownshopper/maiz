@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noticias | Maiz</title>
+    <link rel="icon" type="image/png" href="logico.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="nav">
+        <div>
+            <img src="logotus.png" alt="Logo" style="height: 40px;">
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="noticiasmaiz.html" class="active">Noticias</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+        <div>
+            <a class="btn btn-small btn-outline" href="index.html">Inicio</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="card">
+            <div class="card-header flex-between">
+                <h2>📰 Noticias del Maíz</h2>
+                <button id="refresh-news" class="btn btn-primary btn-small">Actualizar</button>
+            </div>
+            <div class="card-body">
+                <p>Noticias de Maiz en el mercado nacional, precios, tendencias y más.</p>
+                <p> Diariamente se ejecuta una búsqueda de noticias en google sobre el precio del maíz en el mercado nacional y se almacenan en una base de datos.</p>
+            </div>
+            <ul id="news-list" class="mt-20"></ul>
+        </div>
+    </div>
+
+    <footer style="text-align:center; padding: 20px; color: var(--text-light);">
+        <p> 2025 Maiz. Todos los derechos reservados.</p>
+    </footer>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="js/firebase-config.js"></script>
+    <script src="noticiasmaiz.js" defer></script>
+</body>
+</html>

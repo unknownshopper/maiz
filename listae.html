@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Encuestas | The Unknown Shopper</title>
+    <link rel="icon" type="image/png" href="logico.png">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .thumbnail {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .survey-row {
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .survey-row:hover {
+            background: #f0f7f0 !important;
+        }
+        .modal-survey-content {
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+        .product-item {
+            background: #f9f9f9;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            border-left: 3px solid var(--primary-color);
+        }
+        .metadata-box {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            font-size: 14px;
+        }
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+            margin: 15px 0;
+        }
+        .photo-gallery img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div>
+            <img src="logotus.png" alt="Logo" style="height: 40px;">
+        </div>
+        <ul class="nav-links">
+            <li><a href="encuesta.html">Nueva Encuesta</a></li>
+            <li><a href="listae.html" class="active">Lista de Encuestas</a></li>
+            <li><a href="resultados.html">Resultados</a></li>
+        </ul>
+        <div>
+            <span id="userEmail" style="margin-right: 15px;"></span>
+            <button class="btn btn-small btn-danger" onclick="logout()">Salir</button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="card">
+            <!-- En listae.html, actualiza el botón de exportar -->
+            <div class="card-header flex-between">
+                <h2>📋 Lista de Encuestas</h2>
+                <button class="btn btn-success" onclick="exportAllToCSV()" data-permission="export-survey">📥 Exportar CSV</button>
+            </div>
+
+            <!-- Filtros -->
+            <div class="filters">
+                <div class="filters-row">
+                    <div class="form-group">
+                        <label>Zona</label>
+                        <select class="form-control" id="filterZone" onchange="applyFilters()">
+                            <option value="">Todas</option>
+                            <option value="Zona Ríos">Zona Ríos</option>
+                            <option value="Zona Centro">Zona Centro</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Municipio</label>
+                        <select class="form-control" id="filterMunicipality" onchange="applyFilters()">
+                            <option value="">Todos</option>
+                            <option value="Tenosique">Tenosique</option>
+                            <option value="Balancán">Balancán</option>
+                            <option value="Emiliano Zapata">Emiliano Zapata</option>
+                            <option value="Jonuta">Jonuta</option>
+                            <option value="Macuspana">Macuspana</option>
+                            <option value="Villahermosa">Villahermosa</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Tipo</label>
+                        <select class="form-control" id="filterType" onchange="applyFilters()">
+                            <option value="">Todos</option>
+                            <option value="Agroveterinaria">Agroveterinaria</option>
+                            <option value="Ferretería Agrícola">Ferretería Agrícola</option>
+                            <option value="Agropecuaria">Agropecuaria</option>
+                            <option value="Mercado Municipal">Mercado Municipal</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Buscar</label>
+                        <input type="text" class="form-control" id="searchInput" placeholder="Nombre establecimiento..." oninput="applyFilters()">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Loading -->
+            <div id="loading" class="loading">
+                <div class="spinner"></div>
+            </div>
+
+            <!-- Tabla de encuestas -->
+            <div id="tableContainer" class="table-container hidden">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Miniatura</th>
+                            <th>Fecha/Hora</th>
+                            <th>Establecimiento</th>
+                            <th>Tipo</th>
+                            <th>Municipio</th>
+                            <th>Zona</th>
+                            <th>Ubicación GPS</th>
+                            <th>Encuestador</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="surveysTableBody">
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Empty state -->
+            <div id="emptyState" class="hidden text-center" style="padding: 40px;">
+                <div style="font-size: 64px;">📭</div>
+                <h3>No hay encuestas</h3>
+                <p>Comienza creando una nueva encuesta</p>
+                <button class="btn btn-primary mt-20" onclick="location.href='encuesta.html'">Nueva Encuesta</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para ver encuesta -->
+    <div id="surveyModal" class="modal">
+        <div class="modal-content" style="max-width: 900px;">
+            <div class="modal-header">
+                <h2>📋 Detalle de Encuesta</h2>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div id="surveyDetail" class="modal-survey-content"></div>
+            <div class="flex gap-10 mt-20">
+                <button class="btn btn-outline" onclick="closeModal()">Cerrar</button>
+                <button class="btn btn-primary" onclick="downloadPDF()">📄 Descargar PDF</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="js/firebase-config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/permissions.js"></script>
+    <script src="js/survey.js"></script>
+    <script src="js/analytics.js"></script>
+
+    <script>
+        let allSurveys = [];
+        let filteredSurveys = [];
+        let currentSurvey = null;
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            window.firebaseApp.init();
+
+            // Verificar autenticación
+            window.authManager.onAuthStateChanged((user, role) => {
+                if (!user) {
+                    window.location.href = 'index.html';
+                    return;
+                }
+                document.getElementById('userEmail').textContent = user.email;
+            });
+
+            await loadSurveys();
+        });
+
+        async function loadSurveys() {
+            document.getElementById('loading').classList.remove('hidden');
+            document.getElementById('tableContainer').classList.add('hidden');
+            document.getElementById('emptyState').classList.add('hidden');
+
+            const result = await window.surveyManager.getSurveys();
+            
+            if (result.success) {
+                allSurveys = result.surveys;
+                filteredSurveys = allSurveys;
+                renderSurveys();
+            } else {
+                alert('Error cargando encuestas: ' + result.error);
+            }
+
+            document.getElementById('loading').classList.add('hidden');
+        }
+
+        function renderSurveys() {
+            const tbody = document.getElementById('surveysTableBody');
+            tbody.innerHTML = '';
+
+            if (filteredSurveys.length === 0) {
+                document.getElementById('tableContainer').classList.add('hidden');
+                document.getElementById('emptyState').classList.remove('hidden');
+                return;
+            }
+
+            document.getElementById('tableContainer').classList.remove('hidden');
+            document.getElementById('emptyState').classList.add('hidden');
+
+            filteredSurveys.forEach(survey => {
+                const date = survey.metadata?.createdAt?.toDate?.() || new Date();
+                const location = survey.metadata?.location;
+                const gpsText = location ? 
+                    `${location.latitude.toFixed(6)}, ${location.longitude.toFixed(6)}` : 
+                    'No disponible';
+                
+                const row = document.createElement('tr');
+                row.className = 'survey-row';
+                row.onclick = () => showSurveyDetail(survey);
+                
+                row.innerHTML = `
+                    <td>
+                        <div class="thumbnail" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 24px;">
+                            📋
+                        </div>
+                    </td>
+                    <td>
+                        <strong>${date.toLocaleDateString('es-MX')}</strong><br>
+                        <small>${date.toLocaleTimeString('es-MX')}</small>
+                    </td>
+                    <td><strong>${survey.establishmentName || 'N/A'}</strong></td>
+                    <td>${survey.establishmentType || 'N/A'}</td>
+                    <td>${survey.municipality || 'N/A'}</td>
+                    <td><span class="status-badge status-active">${survey.zone || 'N/A'}</span></td>
+                    <td>
+                        <small>${gpsText}</small>
+                        ${location ? `<br><a href="https://www.google.com/maps?q=${location.latitude},${location.longitude}" target="_blank" style="font-size: 12px;">🗺️ Ver mapa</a>` : ''}
+                    </td>
+                    <td><small>${survey.metadata?.createdByEmail || 'N/A'}</small></td>
+                    <td>
+                        <div class="table-actions">
+                            <button class="btn btn-small btn-primary" onclick="event.stopPropagation(); showSurveyDetail(allSurveys.find(s => s.id === '${survey.id}'))">Ver</button>
+                        </div>
+                    </td>
+                `;
+                
+                tbody.appendChild(row);
+            });
+        }
+
+        function applyFilters() {
+            const zone = document.getElementById('filterZone').value;
+            const municipality = document.getElementById('filterMunicipality').value;
+            const type = document.getElementById('filterType').value;
+            const search = document.getElementById('searchInput').value.toLowerCase();
+
+            filteredSurveys = allSurveys.filter(survey => {
+                if (zone && survey.zone !== zone) return false;
+                if (municipality && survey.municipality !== municipality) return false;
+                if (type && survey.establishmentType !== type) return false;
+                if (search && !survey.establishmentName?.toLowerCase().includes(search)) return false;
+                return true;
+            });
+
+            renderSurveys();
+        }
+
+        function showSurveyDetail(survey) {
+            currentSurvey = survey;
+            const modal = document.getElementById('surveyModal');
+            const detail = document.getElementById('surveyDetail');
+            
+            const date = survey.metadata?.createdAt?.toDate?.() || new Date();
+            const location = survey.metadata?.location;
+            
+            let html = `
+                <div class="metadata-box">
+                    <strong>📅 Fecha:</strong> ${date.toLocaleDateString('es-MX')} ${date.toLocaleTimeString('es-MX')}<br>
+                    <strong>👤 Encuestador:</strong> ${survey.metadata?.createdByEmail || 'N/A'}<br>
+                    <strong>📍 GPS:</strong> ${location ? `${location.latitude.toFixed(6)}, ${location.longitude.toFixed(6)} (±${location.accuracy}m)` : 'No disponible'}<br>
+                    <strong>📱 Dispositivo:</strong> ${survey.metadata?.deviceInfo?.platform || 'N/A'}
+                </div>
+
+                <h3>Información del Establecimiento</h3>
+                <div class="product-item">
+                    <strong>Nombre:</strong> ${survey.establishmentName}<br>
+                    <strong>Tipo:</strong> ${survey.establishmentType}<br>
+                    <strong>Municipio:</strong> ${survey.municipality}<br>
+                    <strong>Zona:</strong> ${survey.zone}
+                </div>
+
+                <h3 class="mt-20">Productos Relevados</h3>
+            `;
+
+            // Productos
+            if (survey.products) {
+                Object.entries(survey.products).forEach(([key, product]) => {
+                    if (product.available === 'si') {
+                        html += `
+                            <div class="product-item">
+                                <strong>${product.name}</strong><br>
+                                💰 Precio: $${product.price || 'N/A'}<br>
+                                🏷️ Marca: ${product.brand || 'No especificada'}
+                            </div>
+                        `;
+                    }
+                });
+            }
+
+            // Observaciones
+            if (survey.observations) {
+                html += `
+                    <h3 class="mt-20">Observaciones</h3>
+                    <div class="product-item">${survey.observations}</div>
+                `;
+            }
+
+            // Fotos (si las hay)
+            if (survey.photos && survey.photos.length > 0) {
+                html += `<h3 class="mt-20">Evidencia Fotográfica</h3><div class="photo-gallery">`;
+                survey.photos.forEach(photo => {
+                    html += `<img src="${photo}" alt="Foto" onclick="window.open('${photo}', '_blank')">`;
+                });
+                html += `</div>`;
+            }
+
+            detail.innerHTML = html;
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('surveyModal').classList.remove('active');
+        }
+
+        function downloadPDF() {
+            if (!currentSurvey) return;
+
+            const element = document.getElementById('surveyDetail');
+            const opt = {
+                margin: 10,
+                filename: `encuesta_${currentSurvey.establishmentName}_${new Date().toISOString().split('T')[0]}.pdf`,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+
+            html2pdf().set(opt).from(element).save();
+        }
+
+        function exportAllToCSV() {
+            window.analyticsManager.exportToCSV(filteredSurveys);
+        }
+
+        function logout() {
+            window.authManager.logout();
+            window.location.href = 'index.html';
+        }
+
+        // Cerrar modal al hacer click fuera
+        window.onclick = (event) => {
+            const modal = document.getElementById('surveyModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,175 @@
+/* css/encuesta.css */
+.photo-upload {
+    border: 2px dashed var(--border-color);
+    border-radius: 10px;
+    padding: 30px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.photo-upload:hover {
+    border-color: var(--primary-color);
+    background: #f9f9f9;
+}
+
+.photo-upload input[type="file"] {
+    display: none;
+}
+
+.photo-preview {
+    margin-top: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.photo-preview img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 2px solid var(--border-color);
+}
+
+.product-card {
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    border-left: 4px solid var(--primary-color);
+}
+
+.product-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    font-size: 16px;
+}
+
+/* Checkbox/Radio groups */
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    background: #f8f9fa;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 16px;
+}
+
+.checkbox-label:hover {
+    background: #e8f5e9;
+    border-color: var(--primary-color);
+}
+
+.checkbox-label input[type="radio"],
+.checkbox-label input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin-right: 12px;
+    cursor: pointer;
+    accent-color: var(--primary-color);
+}
+
+.checkbox-label input[type="radio"]:checked ~ span,
+.checkbox-label input[type="checkbox"]:checked ~ span {
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.checkbox-label:has(input:checked) {
+    background: #e8f5e9;
+    border-color: var(--primary-color);
+    box-shadow: 0 2px 8px rgba(76, 175, 80, 0.2);
+}
+
+/* Responsive para móvil */
+@media (max-width: 768px) {
+    .checkbox-label {
+        padding: 15px;
+        font-size: 18px;
+    }
+    
+    .checkbox-label input[type="radio"],
+    .checkbox-label input[type="checkbox"] {
+        width: 24px;
+        height: 24px;
+    }
+}
+
+/* Animaciones suaves */
+.fade-in {
+    animation: fadeIn 0.3s ease forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Lista de sugerencias */
+.suggestions-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.suggestion-item {
+    padding: 12px 15px;
+    background: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 14px;
+}
+
+.suggestion-item:hover {
+    background: #e8f5e9;
+    border-color: var(--primary-color);
+    transform: translateX(5px);
+}
+
+.suggestion-item.selected {
+    background: #e8f5e9;
+    border-color: var(--primary-color);
+    font-weight: 600;
+}
+
+.suggestion-other {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-color: #667eea;
+}
+
+.suggestion-other:hover {
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+    border-color: #764ba2;
+    transform: translateX(5px) scale(1.02);
+}
+
+.suggestion-other.selected {
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+    border-color: #764ba2;
+    box-shadow: 0 4px 12px rgba(118, 75, 162, 0.4);
+}

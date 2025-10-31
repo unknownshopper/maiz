@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Resultados | The Unknown Shopper</title>
+    <link rel="icon" type="image/png" href="logico.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/resultados.css">
+</head>
+<body>
+    <nav class="nav">
+        <div>
+            <img src="logotus.png" alt="Logo" style="height: 40px;">
+        </div>
+        <ul class="nav-links">
+            <li data-permission="create-survey"><a href="encuesta.html">Nueva Encuesta</a></li>
+            <li><a href="listae.html">Lista de Encuestas</a></li>
+            <li><a href="resultados.html" class="active">Resultados</a></li>
+        </ul>
+        <div>
+            <span id="userEmail" style="margin-right: 10px;"></span>
+            <span data-role-name style="background: var(--primary-color); color: white; padding: 4px 10px; border-radius: 12px; font-size: 12px; margin-right: 15px;"></span>
+            <button class="btn btn-small btn-danger" onclick="logout()">Salir</button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Resumen de estadísticas -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon" style="background: #4CAF50;">📊</div>
+                <div class="stat-content">
+                    <div class="stat-value" id="totalSurveys">0</div>
+                    <div class="stat-label">Total Encuestas</div>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon" style="background: #2196F3;">🏪</div>
+                <div class="stat-content">
+                    <div class="stat-value" id="totalEstablishments">0</div>
+                    <div class="stat-label">Establecimientos</div>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon" style="background: #FF9800;">📦</div>
+                <div class="stat-content">
+                    <div class="stat-value" id="totalProducts">0</div>
+                    <div class="stat-label">Productos Registrados</div>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon" style="background: #9C27B0;">👥</div>
+                <div class="stat-content">
+                    <div class="stat-value" id="totalEncuestadores">0</div>
+                    <div class="stat-label">Encuestadores</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filtros -->
+        <div class="card">
+            <div class="card-header">
+                <h3>🔍 Filtros</h3>
+            </div>
+            <div class="filters-row">
+                <div class="filter-group">
+                    <label>Fecha Inicio</label>
+                    <input type="date" id="filterDateStart" class="form-control">
+                </div>
+                <div class="filter-group">
+                    <label>Fecha Fin</label>
+                    <input type="date" id="filterDateEnd" class="form-control">
+                </div>
+                <div class="filter-group">
+                    <label>Municipio</label>
+                    <select id="filterMunicipality" class="form-control">
+                        <option value="">Todos</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Zona</label>
+                    <select id="filterZone" class="form-control">
+                        <option value="">Todas</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <button class="btn btn-primary" onclick="applyFilters()">Aplicar</button>
+                    <button class="btn btn-outline" onclick="clearFilters()">Limpiar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gráficas -->
+        <div class="charts-grid">
+            <!-- Encuestas por municipio -->
+            <div class="card">
+                <div class="card-header flex-between">
+                    <h3>📍 Encuestas por Municipio</h3>
+                    <button class="btn btn-small btn-outline" onclick="exportChart('municipalityChart')" data-permission="export-survey">📥 Exportar</button>
+                </div>
+                <canvas id="municipalityChart"></canvas>
+            </div>
+
+            <!-- Encuestas por zona -->
+            <div class="card">
+                <div class="card-header flex-between">
+                    <h3>🗺️ Encuestas por Zona</h3>
+                    <button class="btn btn-small btn-outline" onclick="exportChart('zoneChart')" data-permission="export-survey">📥 Exportar</button>
+                </div>
+                <canvas id="zoneChart"></canvas>
+            </div>
+
+            <!-- Tipos de establecimiento -->
+            <div class="card">
+                <div class="card-header flex-between">
+                    <h3>🏪 Tipos de Establecimiento</h3>
+                    <button class="btn btn-small btn-outline" onclick="exportChart('establishmentChart')" data-permission="export-survey">📥 Exportar</button>
+                </div>
+                <canvas id="establishmentChart"></canvas>
+            </div>
+
+            <!-- Productos más registrados -->
+            <div class="card">
+                <div class="card-header flex-between">
+                    <h3>📦 Productos Más Registrados</h3>
+                    <button class="btn btn-small btn-outline" onclick="exportChart('productsChart')" data-permission="export-survey">📥 Exportar</button>
+                </div>
+                <canvas id="productsChart"></canvas>
+            </div>
+
+            <!-- Encuestas por fecha -->
+            <div class="card full-width">
+                <div class="card-header flex-between">
+                    <h3>📅 Encuestas por Fecha</h3>
+                    <button class="btn btn-small btn-outline" onclick="exportChart('timelineChart')" data-permission="export-survey">📥 Exportar</button>
+                </div>
+                <canvas id="timelineChart"></canvas>
+            </div>
+
+            <!-- Encuestas por encuestador -->
+            <div class="card full-width">
+                <div class="card-header flex-between">
+                    <h3>👤 Encuestas por Encuestador</h3>
+                    <button class="btn btn-small btn-outline" onclick="exportChart('encuestadorChart')" data-permission="export-survey">📥 Exportar</button>
+                </div>
+                <canvas id="encuestadorChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Tabla de datos detallados -->
+        <div class="card">
+            <div class="card-header flex-between">
+                <h3>📋 Datos Detallados</h3>
+                <button class="btn btn-success" onclick="exportDetailedData()" data-permission="export-survey">📥 Exportar Excel</button>
+            </div>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Establecimiento</th>
+                            <th>Tipo</th>
+                            <th>Municipio</th>
+                            <th>Zona</th>
+                            <th>Productos</th>
+                            <th>Encuestador</th>
+                        </tr>
+                    </thead>
+                    <tbody id="detailedTableBody">
+                        <tr>
+                            <td colspan="7" class="text-center">Cargando datos...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="js/firebase-config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/permissions.js"></script>
+    <script src="js/survey.js"></script>
+    <script src="js/resultados.js"></script>
+</body>
+</html>

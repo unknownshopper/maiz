@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cotización - Estudio de Mercado Tabasco | The Unknown Shopper</title>
+    
+    <!-- Meta Description -->
+    <meta name="description" content="Propuesta de cotización para Estudio de Mercado de productos para ganado bovino en Zona Ríos y Centro de Tabasco. Sistema digital con cadena de custodia y dashboard en tiempo real.">
+    <meta name="keywords" content="estudio de mercado, Tabasco, ganado bovino, investigación de mercado, análisis de precios, The Unknown Shopper">
+    <meta name="author" content="The Unknown Shopper">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://unknownshopper.github.io/maiz/cotizacion.html">
+    <meta property="og:title" content="Cotización - Estudio de Mercado Tabasco | The Unknown Shopper">
+    <meta property="og:description" content="Propuesta profesional para Estudio de Mercado de productos para ganado bovino. 31 establecimientos en Zona Ríos y Centro. Sistema digital con cadena de custodia.">
+    <meta property="og:image" content="https://unknownshopper.github.io/maiz/logotus.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="es_MX">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://unknownshopper.github.io/maiz/cotizacion.html">
+    <meta name="twitter:title" content="Cotización - Estudio de Mercado Tabasco | The Unknown Shopper">
+    <meta name="twitter:description" content="Propuesta profesional para Estudio de Mercado de productos para ganado bovino. 31 establecimientos en Zona Ríos y Centro. Sistema digital con cadena de custodia.">
+    <meta name="twitter:image" content="https://unknownshopper.github.io/maiz/logotus.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="logico.png">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px 50px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #2c5f2d;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #2c5f2d;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .header-logo {
+            max-width: 200px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            color: #2c5f2d;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .header .subtitle {
+            color: #666;
+            font-size: 16px;
+        }
+        
+        .recipient {
+            margin-bottom: 30px;
+            padding: 15px;
+            background: #f9f9f9;
+            border-left: 4px solid #2c5f2d;
+        }
+        
+        .recipient strong {
+            display: block;
+            color: #2c5f2d;
+            margin-bottom: 5px;
+        }
+        
+        .section {
+            margin-bottom: 30px;
+        }
+        
+        .section h2 {
+            color: #2c5f2d;
+            font-size: 20px;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        
+        .section h3 {
+            color: #4a7c4e;
+            font-size: 16px;
+            margin-top: 15px;
+            margin-bottom: 10px;
+        }
+        
+        .section p {
+            margin-bottom: 10px;
+            text-align: justify;
+        }
+        
+        ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        ul li {
+            margin-bottom: 8px;
+            padding-left: 5px;
+        }
+        
+        .products-list {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        
+        .products-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .products-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .methodology-steps {
+            counter-reset: step-counter;
+            list-style: none;
+            margin-left: 0;
+        }
+        
+        .methodology-steps li {
+            counter-increment: step-counter;
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            background: #f0f7f0;
+            border-left: 4px solid #2c5f2d;
+            position: relative;
+        }
+        
+        .methodology-steps li::before {
+            content: counter(step-counter);
+            background: #2c5f2d;
+            color: white;
+            font-weight: bold;
+            padding: 4px 10px;
+            border-radius: 50%;
+            margin-right: 10px;
+            font-size: 14px;
+        }
+        
+        .coverage-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        
+        .coverage-table th,
+        .coverage-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        .coverage-table th {
+            background: #2c5f2d;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .coverage-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        
+        .coverage-table .subtotal {
+            background: #e8f5e9;
+            font-weight: bold;
+        }
+        
+        .coverage-table .total {
+            background: #2c5f2d;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        .timeline-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        
+        .timeline-table th,
+        .timeline-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        .timeline-table th {
+            background: #2c5f2d;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .timeline-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        
+        .investment-box {
+            background: #2c5f2d;
+            color: white;
+            padding: 25px;
+            border-radius: 5px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .investment-box h3 {
+            color: white;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        
+        .investment-box .amount {
+            font-size: 32px;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+        
+        .investment-box .note {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .payment-terms {
+            background: #f0f7f0;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        
+        .deliverables-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 15px 0;
+        }
+        
+        .deliverable-card {
+            background: #f9f9f9;
+            padding: 15px;
+            border-left: 4px solid #4a7c4e;
+            border-radius: 3px;
+        }
+        
+        .deliverable-card strong {
+            color: #2c5f2d;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #e0e0e0;
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .highlight {
+            background: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+        
+        /* Botón de exportar PDF */
+        .export-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #2c5f2d;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .export-button:hover {
+            background: #1f4520;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0,0,0,0.3);
+        }
+        
+        .export-button:active {
+            transform: translateY(0);
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .container {
+                box-shadow: none;
+                padding: 20px;
+                max-width: 100%;
+            }
+            
+            /* Ocultar botón al imprimir */
+            .export-button {
+                display: none !important;
+            }
+            
+            /* Evitar cortes de página */
+            .section {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+            
+            .header {
+                page-break-after: avoid;
+                break-after: avoid;
+            }
+            
+            .recipient {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+            
+            table {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+            
+            .products-list {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+            
+            .methodology-steps li {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+            
+            .deliverables-grid {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+            
+            .investment-box {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+            
+            .payment-terms {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+            
+            h2 {
+                page-break-after: avoid;
+                break-after: avoid;
+            }
+            
+            h3 {
+                page-break-after: avoid;
+                break-after: avoid;
+            }
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .container {
+                box-shadow: none;
+                padding: 20px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            .deliverables-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        @media print {
+            .header-logo {
+                max-width: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Botón de exportar PDF -->
+    <button class="export-button" onclick="exportToPDF()">📄 Exportar a PDF</button>
+    
+    <div class="container">
+        <div class="header">
+            <img src="logotus.png" alt="The Unknown Shopper" class="header-logo">
+            <h1>PROPUESTA DE COTIZACIÓN</h1>
+            <div class="subtitle">Estudio de Mercado - Productos Agrícolas y Ganaderos</div>
+            <div class="subtitle">Zona Ríos y Centro del Estado de Tabasco</div>
+            <div style="margin-top: 15px; color: #999; font-size: 14px;">
+                Fecha: 10 de Octubre, 2025
+            </div>
+        </div>
+        
+        <div class="recipient">
+            <strong>Ing. Erick Montoya Morales:</strong>
+            <div style="font-size: 18px; color: #333;">Presente</div>
+        </div>
+        
+        <!-- INTRODUCCIÓN -->
+        <div class="section">
+            <h2>1. INTRODUCCIÓN</h2>
+            <p>
+                Agradecemos la oportunidad de presentar esta propuesta para el desarrollo de un 
+                <strong>Estudio de Mercado Integral</strong> en la zona Ríos y Centro del Estado de Tabasco. 
+                Nuestro objetivo es proporcionar información precisa y actualizada sobre el mercado de productos agrícolas y ganaderos, que permita la toma de decisiones estratégicas fundamentadas 
+                en datos confiables del mercado local.
+            </p>
+        </div>
+        
+        <!-- OBJETIVO DEL ESTUDIO -->
+        <div class="section">
+            <h2>2. OBJETIVO DEL ESTUDIO</h2>
+            <p>
+                Realizar un análisis cuantitativo y de precios al consumidor final de productos para el ganado bovino en la región especificada, proporcionando información detallada sobre:
+            </p>
+            <ul>
+                <li>Estructura de precios actual en el mercado</li>
+                <li>Variaciones de precios por zona geográfica</li>
+                <li>Canales de distribución y puntos de venta</li>
+                <li>Comportamiento de la demanda</li>
+                <li>Análisis competitivo del mercado</li>
+                <li>Indicadores económicos relevantes</li>
+
+            </ul>
+        </div>
+        
+        <!-- PRODUCTOS A ANALIZAR -->
+        <div class="section">
+            <h2>3. PRODUCTOS OBJETO DE ESTUDIO</h2>
+            <p>El estudio abarcará el análisis cuantitativo y de precios de los siguientes productos:</p>
+            <div class="products-list">
+                <ul>
+                    <li>✓ Maíz blanco al menudeo</li>
+                    <li>✓ Maíz blanco en saco de 25kg</li>
+                    <li>✓ Maíz amarillo quebrado en sacos de 25kg</li>
+                    <li>✓ Alimento de engorda para ganado en 25kg</li>
+                    <li>✓ Alimento para becerros en 25kg</li>
+                    <li>✓ Alimento para vaca lechera en 25kg</li>
+                    <li>✓ Alimento para ganado económico o mantenimiento en 25kg</li>
+                    <li>✓ Sal mineral para engorda</li>
+                    
+                </ul>
+            </div>
+        </div>
+        
+        <!-- METODOLOGÍA -->
+        <div class="section">
+            <h2>4. METODOLOGÍA DEL ESTUDIO</h2>
+            <p>
+                El estudio se desarrollará mediante una metodología mixta que combina técnicas cuantitativas de investigación de mercado, siguiendo los siguientes pasos:
+            </p>
+            
+            <ul class="methodology-steps">
+                <li>
+                    <strong>Diseño de la Investigación</strong><br>
+                    Definición del marco metodológico, diseño de instrumentos de recolección de datos (cuestionarios estructurados), y establecimiento de criterios de muestreo.
+                </li>
+                <li>
+                    <strong>Identificación de Puntos de Venta</strong><br>
+                    Mapeo y georreferenciación de establecimientos comerciales: tiendas de abarrotes, ferreterías agrícolas, distribuidoras, mercados municipales y puntos de venta especializados en las zonas objetivo.
+                </li>
+                <li>
+                    <strong>Trabajo de Campo</strong><br>
+                    Levantamiento de información mediante encuestas presenciales en puntos de venta identificados. Recolección de precios, disponibilidad, marcas, presentaciones y volúmenes de venta.
+                </li>
+                <li>
+                    <strong>Análisis Cuantitativo</strong><br>
+                    Procesamiento estadístico de datos: cálculo de promedios, medianas, rangos de precios, desviación estándar, análisis de frecuencias y segmentación por zona geográfica.
+                </li>
+                <li>
+                    <strong>Análisis de Precios al Consumidor Final</strong><br>
+                    Determinación de precios mínimos, máximos y promedio por producto. Identificación de factores que influyen en la variación de precios (ubicación, tipo de establecimiento, marca, temporalidad).
+                </li>
+                <li>
+                    <strong>Análisis Comparativo</strong><br>
+                    Comparación de precios entre zonas geográficas, tipos de establecimientos y presentaciones de productos.
+                </li>
+                <li>
+                    <strong>Elaboración de Informe Final</strong><br>
+                    Integración de resultados, elaboración de gráficos, tablas comparativas, mapas de precios y conclusiones con recomendaciones estratégicas.
+                </li>
+            </ul>
+        </div>
+        
+        <!-- COBERTURA GEOGRÁFICA -->
+        <div class="section">
+            <h2>5. COBERTURA GEOGRÁFICA</h2>
+            <p>
+                El estudio se realizará en <strong>31 establecimientos comerciales</strong> distribuidos estratégicamente en las siguientes regiones del Estado de Tabasco:
+            </p>
+            
+            <table class="coverage-table">
+                <thead>
+                    <tr>
+                        <th>Región</th>
+                        <th>Municipio</th>
+                        <th>Número de Establecimientos <br> (propuesta)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td rowspan="6"><strong>ZONA RÍOS</strong></td>
+                        <td>Tenosique</td>
+                        <td style="text-align: center;">5</td>
+                    </tr>
+                    <tr>
+                        <td>Balancán</td>
+                        <td style="text-align: center;">4</td>
+                    </tr>
+                    <tr>
+                        <td>Emiliano Zapata</td>
+                        <td style="text-align: center;">7</td>
+                    </tr>
+                    <tr>
+                        <td>Jonuta</td>
+                        <td style="text-align: center;">2</td>
+                    </tr>
+                    <tr>
+                        <td>Macuspana</td>
+                        <td style="text-align: center;">3</td>
+                    </tr>
+                    <tr class="subtotal">
+                        <td><strong>Subtotal Zona Ríos</strong></td>
+                        <td style="text-align: center;"><strong>21</strong></td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2"><strong>ZONA CENTRO</strong></td>
+                        <td>Villahermosa (Centro)</td>
+                        <td style="text-align: center;">10</td>
+                    </tr>
+                    <tr class="subtotal">
+                        <td><strong>Subtotal Zona Centro</strong></td>
+                        <td style="text-align: center;"><strong>10</strong></td>
+                    </tr>
+                    <tr class="total">
+                        <td colspan="2"><strong>TOTAL DE ESTABLECIMIENTOS</strong></td>
+                        <td style="text-align: center;"><strong>31</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>Tipos de Establecimientos a Encuestar:</h3>
+            <ul>
+                <li>Agroveterinarias</li>
+                <li>Ferreterías agrícolas y agropecuarias</li>
+                <li>Agropecuarias</li>
+                <li>Mercados municipales</li>
+                <li>Puntos de venta de alimentos para ganado</li>
+                <li>Comercializadoras de granos y semillas</li>
+            </ul>
+            
+            <p style="margin-top: 15px;">
+                <strong>Criterios de selección:</strong> Los establecimientos serán seleccionados considerando su representatividad en el mercado local, volumen de ventas, ubicación estratégica y diversidad de productos ofrecidos, garantizando una muestra representativa del mercado en cada municipio.
+            </p>
+        </div>
+        
+        <!-- ENTREGABLES -->
+        <div class="section">
+            <h2>6. ENTREGABLES</h2>
+            <p>Al finalizar el estudio, se entregarán los siguientes productos:</p>
+            
+            <div class="deliverables-grid">
+                <div class="deliverable-card">
+                    <strong>📊 Informe Ejecutivo</strong>
+                    Resumen de hallazgos principales, conclusiones y recomendaciones estratégicas.
+                </div>
+                <div class="deliverable-card">
+                    <strong>📑 Informe Técnico Completo</strong>
+                    Documento detallado con metodología, análisis estadístico completo, gráficos y tablas.
+                </div>
+                <div class="deliverable-card">
+                    <strong>📈 Base de Datos</strong>
+                    Archivo Excel con toda la información recolectada, procesada y codificada para análisis adicionales.
+                </div>
+                <div class="deliverable-card">
+                    <strong>🗺️ Mapas de Precios</strong>
+                    Representación geográfica de la distribución de precios por zona y producto.
+                </div>
+                <div class="deliverable-card">
+                    <strong>📊 Dashboard Interactivo</strong>
+                    Tablero de control en formato digital con visualizaciones interactivas de datos.
+                </div>
+                <div class="deliverable-card">
+                    <strong>💼 Presentación Ejecutiva</strong>
+                    Presentación en PowerPoint para socialización de resultados.
+                </div>
+            </div>
+            
+            <p style="margin-top: 15px;">
+                <strong>Formato de entrega:</strong> 100% digital (PDF, Excel, PowerPoint, Dashboard web interactivo).
+            </p>
+        </div>
+        
+               <!-- CRONOGRAMA -->
+               <div class="section">
+                <h2>7. CRONOGRAMA DE EJECUCIÓN</h2>
+                <p>El proyecto se desarrollará en un plazo de <strong class="highlight">3 semanas</strong> a partir de la firma del contrato:</p>
+                
+                <table class="timeline-table">
+                    <thead>
+                        <tr>
+                            <th>Fase</th>
+                            <th>Actividad</th>
+                            <th>Duración</th>
+                            <th>Periodo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Fase 1</strong></td>
+                            <td>Diseño metodológico, instrumentos e identificación de puntos de venta</td>
+                            <td>3 días</td>
+                            <td>Días 1-3</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Fase 2</strong></td>
+                            <td>Trabajo de campo y recolección de datos (31 establecimientos)</td>
+                            <td>1 semana</td>
+                            <td>Días 4-10</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Fase 3</strong></td>
+                            <td>Procesamiento y análisis estadístico de información</td>
+                            <td>4 días</td>
+                            <td>Días 11-14</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Fase 4</strong></td>
+                            <td>Elaboración de informes, gráficos y entregables finales</td>
+                            <td>5 días</td>
+                            <td>Días 15-19</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Fase 5</strong></td>
+                            <td>Presentación de resultados y entrega final</td>
+                            <td>2 días</td>
+                            <td>Días 20-21</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <p style="margin-top: 15px;">
+                    <strong>Nota:</strong> El cronograma está optimizado considerando el número de establecimientos (31) y la experiencia del equipo de trabajo. Se garantiza la calidad de los datos y análisis en este plazo.
+                </p>
+            </div>
+        
+        <!-- INVERSIÓN -->
+        <div class="section">
+            <h2>8. INVERSIÓN</h2>
+            
+            <div class="investment-box">
+                <h3>INVERSIÓN TOTAL DEL PROYECTO</h3>
+                <div class="amount">$85,000.00 MXN</div>
+                <div class="note">(Ochenta y cinco mil pesos 00/100 M.N.)</div>
+                <div class="note" style="margin-top: 10px;">* IVA incluido</div>
+            </div>
+            
+            <h3>Desglose de Inversión:</h3>
+            <ul>
+                <li><strong>Diseño metodológico y planeación:</strong> </li>
+                <li><strong>Software de encuestas digital con cadena de custodia:</strong> </li>
+                <li><strong>Trabajo de campo (encuestadores, transporte, viáticos):</strong> </li>
+                <li><strong>Procesamiento y análisis de datos:</strong> </li>
+                <li><strong>Elaboración de informes y entregables:</strong> </li>
+                <li><strong>Presentación de resultados y seguimiento:</strong> </li>
+            </ul>
+            
+            <p style="margin-top: 15px;"><strong>La inversión incluye:</strong></p>
+            <ul>
+                <li>Personal especializado (coordinador, encuestadores, analistas)</li>
+                <li>Transporte y viáticos para trabajo de campo</li>
+                <li><strong>Sistema de encuestas digital con cadena de custodia</strong> para garantizar veracidad de datos</li>
+                <li><strong>Dashboard con gráficas interactivas en tiempo real</strong> durante el levantamiento</li>
+                <li>Software de análisis estadístico avanzado</li>
+                <li>Plataforma web para visualización de resultados</li>
+                <li>Presentación ejecutiva de resultados</li>
+            </ul>
+        </div>
+        
+         <!-- FORMA DE PAGO -->
+         <div class="section">
+            <h2>9. FORMA DE PAGO Y PLAZO DE ENTREGA</h2>
+            
+            <p style="margin-bottom: 15px;">
+                <strong>Plazo de entrega:</strong> <span class="highlight">2 a 3 semanas</span> a partir de la firma del contrato.
+            </p>
+            
+            <h3>Opción 1 (Recomendada): Pago en dos exhibiciones 50-50</h3>
+            <div class="payment-terms">
+                <ul style="margin-top: 10px;">
+                    <li>
+                        <strong>50% al firmar el contrato</strong> <br>
+                        <span style="color: #666; font-size: 14px;">
+                            Para inicio de actividades y movilización de equipo de campo
+                        </span>
+                    </li>
+                    <li style="margin-top: 10px;">
+                        <strong>50% contra entrega final</strong> <br>
+                        <span style="color: #666; font-size: 14px;">
+                            Al entregar todos los productos finales (2-3 semanas)
+                        </span>
+                    </li>
+                </ul>
+            </div>
+            
+            <h3 style="margin-top: 25px;">Opción 2: Pago en tres exhibiciones 40-30-30</h3>
+            <div class="payment-terms">
+                <ul style="margin-top: 10px;">
+                    <li>
+                        <strong>40% al firmar el contrato</strong> <br>
+                        <span style="color: #666; font-size: 14px;">
+                            Para inicio de actividades y movilización de equipo de campo
+                        </span>
+                    </li>
+                    <li style="margin-top: 10px;">
+                        <strong>30% al concluir el trabajo de campo</strong> <br>
+                        <span style="color: #666; font-size: 14px;">
+                            Al finalizar la recolección de datos (Semana 2)
+                        </span>
+                    </li>
+                    <li style="margin-top: 10px;">
+                        <strong>30% contra entrega final</strong> <br>
+                        <span style="color: #666; font-size: 14px;">
+                            Al entregar todos los productos finales (Semana 3)
+                        </span>
+                    </li>
+                </ul>
+            </div>
+            
+            <p style="margin-top: 20px; font-size: 14px; color: #666;">
+                <strong>Métodos de pago aceptados:</strong> Transferencia bancaria, cheque certificado o depósito bancario y efectivo.
+            </p>
+        </div>
+        
+        <!-- GARANTÍAS -->
+        <div class="section">
+            <h2>10. GARANTÍAS Y COMPROMISOS</h2>
+            <ul>
+                <li><strong>Confidencialidad:</strong> Toda la información recolectada será tratada con estricta confidencialidad</li>
+                <li><strong>Calidad:</strong> Personal capacitado y con experiencia en estudios de mercado</li>
+                <li><strong>Cumplimiento:</strong> Entrega en tiempo y forma según cronograma establecido</li>
+                <li><strong>Soporte:</strong> Asesoría post-entrega por 30 días para aclaración de dudas</li>
+                <li><strong>Revisiones:</strong> Una ronda de ajustes al informe final sin costo adicional</li>
+            </ul>
+        </div>
+        
+        <!-- VIGENCIA -->
+        <div class="section">
+            <h2>11. VIGENCIA DE LA PROPUESTA</h2>
+            <p>
+                Esta propuesta tiene una vigencia de <strong>30 días naturales</strong> a partir de la fecha 
+                de emisión. Los precios están sujetos a cambios después de este período.
+            </p>
+        </div>
+        
+        <!-- CIERRE -->
+        <div class="section">
+            <h2>12. CONTACTO</h2>
+            <p>
+                Para cualquier aclaración o información adicional sobre esta propuesta, favor de contactarnos:
+            </p>
+            <ul style="list-style: none; margin-left: 0;">
+                <li>📧 <strong>Email:</strong> the@unknownshoppers.com</li>
+                <li>📱 <strong>Teléfono:</strong> (993) 217-1855</li>
+                <li>📍 <strong>Dirección:</strong> Villahermosa, Tabasco</li>
+            </ul>
+        </div>
+        
+        <div class="footer">
+            <p style="margin-bottom: 10px;">
+                <strong>Agradecemos su confianza y quedamos a sus órdenes para cualquier aclaración.</strong>
+            </p>
+            <p style="font-size: 12px; color: #999;">
+                Este documento es una propuesta comercial y no constituye un contrato vinculante hasta su aceptación formal.
+            </p>
+        </div>
+    </div>
+</div>
+    
+<script>
+    function exportToPDF() {
+        // Ocultar el botón temporalmente
+        const button = document.querySelector('.export-button');
+        button.style.display = 'none';
+        
+        // Configurar el título del documento
+        const originalTitle = document.title;
+        document.title = 'Cotizacion_Estudio_Mercado_Tabasco';
+        
+        // Imprimir (esto abre el diálogo de impresión donde se puede guardar como PDF)
+        window.print();
+        
+        // Restaurar el botón después de un momento
+        setTimeout(() => {
+            button.style.display = 'block';
+            document.title = originalTitle;
+        }, 100);
+    }
+</script>
+</body>
+</html>

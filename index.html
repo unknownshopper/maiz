@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | The Unknown Shopper</title>
+    <link rel="icon" type="image/png" href="logico.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <img src="logotus.png" alt="The Unknown Shopper" class="logo">
+                <h1>Sistema de Encuestas</h1>
+                <p>Estudio de Mercado - Tabasco</p>
+            </div>
+
+            <form id="loginForm" class="login-form">
+                <div class="form-group">
+                    <label>Correo Electrónico</label>
+                    <input type="email" class="form-control" id="email" required placeholder="correo@ejemplo.com">
+                </div>
+
+                <div class="form-group">
+                    <label>Contraseña</label>
+                    <input type="password" class="form-control" id="password" required placeholder="••••••••">
+                </div>
+
+                <div id="errorMessage" class="alert alert-error hidden"></div>
+
+                <button type="submit" class="btn btn-primary btn-large" id="loginBtn">
+                    Iniciar Sesión
+                </button>
+            </form>
+
+            <div class="login-footer">
+                <p>Sistema de encuestas con cadena de custodia</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="js/firebase-config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/permissions.js"></script>
+    <script src="js/login.js"></script>
+</body>
+</html>

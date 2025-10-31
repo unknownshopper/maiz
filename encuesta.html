@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nueva Encuesta | The Unknown Shopper</title>
+    <link rel="icon" type="image/png" href="logico.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/encuesta.css">
+</head>
+<body>
+    <div class="container-small">
+        <div class="card">
+            <div class="header">
+                <h1>📋 Nueva Encuesta</h1>
+                <div class="user-info">
+                    <span id="userEmail">Cargando...</span>
+                    <button class="btn btn-small btn-danger" onclick="logout()">Salir</button>
+                </div>
+            </div>
+
+           
+            <form id="surveyForm">
+                <h3>Información del Establecimiento</h3>
+            
+                <div class="form-group">
+                    <label class="required">Zona</label>
+                    <div class="checkbox-group" id="zoneGroup">
+                        <label class="checkbox-label">
+                            <input type="radio" name="zone" value="Zona Ríos" required>
+                            <span>Zona Ríos</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="radio" name="zone" value="Zona Centro" required>
+                            <span>Zona Centro</span>
+                        </label>
+                    </div>
+                </div>
+            
+                <div class="form-group" id="municipalityGroup" style="display: none; opacity: 0; transition: all 0.3s ease;">
+                    <label class="required">Municipio</label>
+                    <div class="checkbox-group" id="municipalityOptions">
+                        <!-- Se llenará dinámicamente -->
+                    </div>
+                </div>
+            
+                <div class="form-group" id="establishmentSuggestionsGroup" style="display: none; opacity: 0; transition: all 0.3s ease;">
+                    <label>Establecimientos sugeridos en esta zona</label>
+                    <div id="establishmentSuggestions" class="suggestions-list">
+                        <!-- Se llenará dinámicamente -->
+                    </div>
+                </div>
+            
+                <div class="form-group" id="establishmentNameGroup" style="display: none; opacity: 0; transition: all 0.3s ease;">
+                    <label class="required">Nombre del Establecimiento</label>
+                    <input type="text" class="form-control" name="establishmentName" id="establishmentNameInput" required placeholder="Escribe o selecciona de las sugerencias">
+                </div>
+            
+              
+
+                <div class="form-group">
+                    <label class="required">Tipo</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="radio" name="establishmentType" value="Agroveterinaria" required>
+                            <span>Agroveterinaria</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="radio" name="establishmentType" value="Ferretería Agrícola" required>
+                            <span>Ferretería Agrícola</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="radio" name="establishmentType" value="Agropecuaria" required>
+                            <span>Agropecuaria</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="radio" name="establishmentType" value="Mercado Municipal" required>
+                            <span>Mercado Municipal</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="radio" name="establishmentType" value="Otro" required>
+                            <span>Otro</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group" id="otherTypeContainer" style="display: none;">
+                    <label class="required">Especificar tipo</label>
+                    <input type="text" class="form-control" id="otherTypeInput" placeholder="Ingrese el tipo de establecimiento">
+                </div>
+
+                <h3 class="mt-20">Productos</h3>
+                <div id="productsContainer"></div>
+
+                <h3 class="mt-20">Prácticas de Alimentación</h3>
+
+                <div class="form-group">
+                    <label class="required">¿Combina el maíz con algún otro grano?</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="radio" name="combinesGrain" value="si" required>
+                            <span>Sí</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="radio" name="combinesGrain" value="no" required>
+                            <span>No</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group" id="grainTypeContainer" style="display: none;">
+                    <label class="required">¿Con qué grano lo combina?</label>
+                    <input type="text" class="form-control" id="grainType" name="grainType" placeholder="Ej: Sorgo, avena, etc.">
+                </div>
+
+                <div class="form-group">
+                    <label class="required">¿Utiliza melaza en la alimentación?</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="radio" name="usesMolasses" value="si" required>
+                            <span>Sí</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="radio" name="usesMolasses" value="no" required>
+                            <span>No</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group" id="molassesReasonContainer" style="display: none;">
+                    <label>¿Por qué utiliza melaza?</label>
+                    <textarea class="form-control" name="molassesReason" rows="2" placeholder="Ej: Mejora palatabilidad, aporta energía, etc."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="required">¿Utiliza gallinaza en la alimentación?</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="radio" name="usesPoultryLitter" value="si" required>
+                            <span>Sí</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="radio" name="usesPoultryLitter" value="no" required>
+                            <span>No</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group" id="poultryLitterReasonContainer" style="display: none;">
+                    <label>¿Por qué utiliza gallinaza?</label>
+                    <textarea class="form-control" name="poultryLitterReason" rows="2" placeholder="Ej: Fuente de proteína, económico, etc."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Otros ingredientes que utiliza en la alimentación</label>
+                    <textarea class="form-control" name="otherIngredients" rows="3" placeholder="Ej: Pasta de soya, minerales, vitaminas, etc."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Beneficios observados de estas combinaciones</label>
+                    <textarea class="form-control" name="combinationBenefits" rows="3" placeholder="Ej: Mejor ganancia de peso, reducción de costos, mejor salud del ganado, etc."></textarea>
+                </div>
+
+                <div class="form-group mt-20">
+                    <label class="photo-upload" for="photoInput">
+                        📷 Tomar foto del establecimiento
+                        <input type="file" id="photoInput" accept="image/*" capture="environment" multiple>
+                    </label>
+                    <div id="photoPreview" class="photo-preview"></div>
+                </div>
+
+                <div class="form-group">
+                    <label>Observaciones</label>
+                    <textarea class="form-control" name="observations" rows="3"></textarea>
+                </div>
+
+                <div class="flex gap-10 mt-20">
+                    <button type="button" class="btn btn-outline" onclick="location.href='listae.html'">Cancelar</button>
+                    <div id="supervisorWarning" style="display: none; padding: 15px; background: #fff3cd; border: 1px solid #ffc107; border-radius: 8px; margin-bottom: 15px;">
+                        ⚠️ <strong>Modo solo lectura:</strong> Los supervisores pueden ver las encuestas pero no pueden crear nuevas.
+                    </div>
+                    
+                    <div class="flex gap-10 mt-20">
+                        <button type="button" class="btn btn-outline" onclick="location.href='listae.html'">Cancelar</button>
+                        <button type="submit" class="btn btn-primary" id="submitBtn">Guardar Encuesta</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="js/firebase-config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/permissions.js"></script>
+    <script src="js/survey.js"></script>
+    <script src="js/locations-data.js"></script>
+    <script src="js/encuesta.js"></script>
+</body>
+</html>
