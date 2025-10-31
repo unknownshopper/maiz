@@ -2,8 +2,11 @@ name: News Ingest
 
 on:
   schedule:
-    - cron: '0 0 * * *'
+    - cron: '0 4 * * *'
   workflow_dispatch: {}
+
+permissions:
+  contents: write
 
 jobs:
   ingest:
@@ -45,3 +48,24 @@ jobs:
         with:
           name: news-pdf-${{ github.run_id }}
           path: exports/*.pdf
+
+      - name: Export JSON (last 24h)
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+        run: |
+          if [ -z "${FIREBASE_SERVICE_ACCOUNT}" ]; then
+            echo "Missing secret FIREBASE_SERVICE_ACCOUNT" >&2
+            exit 1
+          fi
+          node scripts/export-json.js
+
+      - name: Publish JSON/PDF to docs for GitHub Pages
+        run: |
+          mkdir -p docs/data docs/reports
+          cp -f exports/*.json docs/data/ || true
+          cp -f exports/*.pdf docs/reports/ || true
+          git config user.name "github-actions"
+          git config user.email "github-actions@users.noreply.github.com"
+          git add docs/data docs/reports
+          git commit -m "chore: daily exports $(date -u +%F)" || echo "No changes to commit"
+          git push

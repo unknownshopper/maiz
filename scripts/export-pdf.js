@@ -74,27 +74,44 @@ async function makePdf(items) {
   const stream = fs.createWriteStream(outPath);
   doc.pipe(stream);
 
-  // Header
-  doc.fontSize(18).fillColor('#111827').text('Noticias de maíz', { align: 'left' });
+  // Header with logo
+  const logoPath = path.join(process.cwd(), 'logotus.png');
+  const headerY = doc.y;
+  let headerHeight = 0;
+  try {
+    if (fs.existsSync(logoPath)) {
+      doc.image(logoPath, doc.page.margins.left, headerY, { width: 120 });
+      headerHeight = 50;
+    }
+  } catch {}
+  const titleX = doc.page.margins.left + (headerHeight ? 130 : 0);
+  const titleY = headerY;
+  doc.fillColor('#111827').fontSize(18).text('Reporte Diario de Noticias de Maíz', titleX, titleY, { continued: false });
   doc.moveDown(0.2);
-  doc.fontSize(10).fillColor('#6b7280').text(`Generado: ${formatDate(new Date())} • Total: ${items.length}`);
-  doc.moveDown(0.5);
+  doc.fillColor('#374151').fontSize(11).text('The Unknown Shopper', { align: 'left' });
+  doc.moveDown(0.2);
+  doc.fontSize(10).fillColor('#6b7280').text(`Generado: ${formatDate(new Date())} • Total: ${items.length}`, { align: 'left' });
+  doc.moveDown(0.6);
+  // Divider
+  doc.strokeColor('#d1d5db').moveTo(doc.page.margins.left, doc.y).lineTo(doc.page.width - doc.page.margins.right, doc.y).stroke();
+  doc.moveDown(0.6);
 
   // Table-like rows
   let i = 0;
   for (const it of items) {
     i += 1;
+    // Index + title
     doc.fillColor('#6b7280').fontSize(10).text(`${i}.`, { continued: true });
-    doc.fillColor('#111827').fontSize(12).text(it.title);
+    doc.fillColor('#111827').fontSize(12).text(it.title, { underline: false });
     const meta = [it.source || '', it.date ? formatDate(it.date) : ''].filter(Boolean).join(' • ');
     if (meta) doc.fillColor('#6b7280').fontSize(10).text(meta);
     if (it.link) {
       doc.fillColor('#2563eb').fontSize(10).text(it.link, { link: it.link, underline: false });
     }
-    doc.moveDown(0.4);
+    doc.moveDown(0.6);
     // Divider
     doc.strokeColor('#e5e7eb').moveTo(doc.page.margins.left, doc.y).lineTo(doc.page.width - doc.page.margins.right, doc.y).stroke();
-    doc.moveDown(0.4);
+    doc.moveDown(0.6);
   }
 
   doc.end();
